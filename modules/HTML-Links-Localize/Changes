@@ -1,0 +1,8 @@
+0.2.4:
+
+Added the Changes file to the MANIFEST.
+
+0.2.3:
+
+Fixed a documentation bug that said HTML::Hard::Disk instead of 
+HTML::Links::Localize.

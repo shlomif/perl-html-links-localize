@@ -1,0 +1,8 @@
+MANIFEST
+README
+COPYING
+Changes
+Makefile.PL
+lib/HTML/Links/Localize.pm
+html-to-hd
+t/use.t
