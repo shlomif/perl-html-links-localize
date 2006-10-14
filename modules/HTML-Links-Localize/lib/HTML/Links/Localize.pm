@@ -346,5 +346,18 @@ in a make-like fashion.
 
 Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
 
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2004, Shlomi Fish. All rights reserved.
+
+You can use, modify and distribute this module under the terms of the MIT X11
+license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
+
+=head2 NOTE
+
+The CPAN meta-data says this work is "BSD-licensed". The BSD license was chosen
+because it was the closest option to MIT X11, and because the MIT X11 license
+is a BSD-style license. However, the correct license is the MIT X11.
+
 =cut
 
