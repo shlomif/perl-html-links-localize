@@ -1,3 +1,11 @@
+0.2.5:    Sat Oct 14 13:27:21 IST 2006
+
+    * Specified the license.
+    * Added pod.t and pod-coverage.t
+        - prefixed the inner functions with underscores
+    * Added a Buile.PL file.
+    * Added the examples directory
+
 0.2.4:
 
 Added the Changes file to the MANIFEST.
