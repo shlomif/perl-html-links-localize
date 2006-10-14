@@ -11,7 +11,7 @@ use vars qw($VERSION);
 $VERSION = "0.2.4";
 
 # Two utility functions
-sub is_older
+sub _is_older
 {
     my $file1 = shift;
     my $file2 = shift;
@@ -20,11 +20,11 @@ sub is_older
     return ($stat1[9] <= $stat2[9]);
 }
 
-sub is_newer
+sub _is_newer
 {
     my $file1 = shift;
     my $file2 = shift;
-    return (! &is_older($file1, $file2));
+    return (! _is_older($file1, $file2));
 }
 
 sub new
@@ -33,12 +33,12 @@ sub new
     my $self = {};
     bless $self, $class;
 
-    $self->initialize(@_);
+    $self->_init(@_);
 
     return $self;
 }
 
-sub set_base_dir
+sub _set_base_dir
 {
     my $self = shift;
 
@@ -51,14 +51,14 @@ sub set_base_dir
     return 0;
 }
 
-sub get_base_dir
+sub _get_base_dir
 {
     my $self = shift;
 
     return $self->{'base_dir'};
 }
 
-sub set_dest_dir
+sub _set_dest_dir
 {
     my $self = shift;
 
@@ -69,22 +69,22 @@ sub set_dest_dir
     return 0;
 }
 
-sub get_dest_dir
+sub _get_dest_dir
 {
     my $self = shift;
 
     return $self->{'dest_dir'};
 }
 
-sub initialize
+sub _init
 {
     my $self = shift;
 
     my %args = @_;
 
-    $self->set_base_dir($args{'base_dir'} || ".");
+    $self->_set_base_dir($args{'base_dir'} || ".");
 
-    $self->set_dest_dir($args{'dest_dir'} || "./dest");
+    $self->_set_dest_dir($args{'dest_dir'} || "./dest");
 
     return 0;
 }
@@ -182,8 +182,8 @@ sub process_file
     my $self = shift;
     my $file = shift;
 
-    my $dest_dir = $self->get_dest_dir();
-    my $src_dir = $self->get_base_dir();
+    my $dest_dir = $self->_get_dest_dir();
+    my $src_dir = $self->_get_base_dir();
     local (*I, *O);
     open I, "<$src_dir/$file" || die "Cannot open '$src_dir/$file' - $!";
     open O, ">$dest_dir/$file" || die "Cannot open '$dest_dir/$file' for writing- $!";
@@ -202,7 +202,7 @@ sub process_dir_tree
         my ($src, $dest) = @_;
         if ($args{'only-newer'})
         {
-            return ((! -e $dest) || (&is_newer($src, $dest)));
+            return ((! -e $dest) || (_is_newer($src, $dest)));
         }
         else
         {
@@ -210,8 +210,8 @@ sub process_dir_tree
         }
     };
 
-    my $src_dir = $self->get_base_dir();
-    my $dest_dir = $self->get_dest_dir();
+    my $src_dir = $self->_get_base_dir();
+    my $dest_dir = $self->_get_dest_dir();
 
     my (@dirs, @other_files, @html_files);
 
@@ -315,12 +315,15 @@ HTML::Links::Localize converts HTML files to be used when viewing on the
 hard disk. Namely, it converts relative links to point to "index.html"
 files in their directories.
 
-To use it, first initialize an instance using new. The constructor
-accepts two named parameters which are mandatory. C<'base_dir'> is
-the base directory (or source directory) for the operations. 
-C<'dest_dir'> is the root destination directory.
+To use it, first initialize an instance using new:
 
-Afterwards, you can use the methods:
+=head2 $converter = HTML::Links::Localize->new(base_dir => $base_dir, dest_dir => $dest_dir)
+
+The constructor accepts two named parameters which are mandatory. 
+C<'base_dir'> is the base directory (or source directory) for the 
+operations. C<'dest_dir'> is the root destination directory.
+
+Afterwards, you can use the other methods.
 
 =head2 $new_content = $converter->process_content(FILE)
 
@@ -341,7 +344,7 @@ in a make-like fashion.
 
 =head1 AUTHOR
 
-Shlomi Fish E<lt>shlomif@vipe.technion.ac.ilE<gt>
+Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
 
 =cut
 
