@@ -13,7 +13,7 @@ my $build = Test::Run::Builder->new(
         'HTML::Parser' => 0,
     },
     'script_files' => "html-to-hd",
-    'license' => "bsd",
+    'license' => "mit",
     'create_makefile_pl' => "traditional",
 );
 $build->create_build_script;
