@@ -1,3 +1,7 @@
+    * Fixed the html-to-hd script to use HTML::Links::Localize instead of
+    HTML::Hard::Disk.
+        - https://rt.cpan.org/Ticket/Display.html?id=41518
+ 
 0.2.5:    Sat Oct 14 13:27:21 IST 2006
 
     * Specified the license.

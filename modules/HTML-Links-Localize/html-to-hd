@@ -3,7 +3,7 @@
 use strict;
 
 use Getopt::Long;
-use HTML::Hard::Disk;
+use HTML::Links::Localize;
 
 my $only_newer;
 
@@ -13,7 +13,7 @@ my $src_dir = shift;
 my $dest_dir = shift || "./dest";
 
 my $converter = 
-    HTML::Hard::Disk->new(
+    HTML::Links::Localize->new(
         'base_dir' => $src_dir,
         'dest_dir' => $dest_dir
     );
