@@ -348,7 +348,7 @@ Shlomi Fish, L<http://www.shlomifish.org/>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2004, Shlomi Fish. All rights reserved.
+Copyright 2004, Shlomi Fish.
 
 You can use, modify and distribute this module under the terms of the MIT X11
 license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
