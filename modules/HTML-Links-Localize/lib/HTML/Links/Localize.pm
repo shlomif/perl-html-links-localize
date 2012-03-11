@@ -9,7 +9,7 @@ use File::Copy;
 
 use vars qw($VERSION);
 
-$VERSION = "0.2.6";
+$VERSION = "0.2.7";
 
 # Two utility functions
 sub _is_older
