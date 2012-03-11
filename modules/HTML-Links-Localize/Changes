@@ -1,3 +1,5 @@
+    * Modernized t/use.t and converted it from Test.pm to Test::More.
+
 0.2.6:   Sat Apr  4 21:16:50 IDT 2009
     * Fixed the html-to-hd script to use HTML::Links::Localize instead of
     HTML::Hard::Disk.
@@ -13,9 +15,9 @@
 
 0.2.4:
 
-Added the Changes file to the MANIFEST.
+    * Added the Changes file to the MANIFEST.
 
 0.2.3:
 
-Fixed a documentation bug that said HTML::Hard::Disk instead of 
-HTML::Links::Localize.
+    * Fixed a documentation bug that said HTML::Hard::Disk instead of 
+    HTML::Links::Localize.

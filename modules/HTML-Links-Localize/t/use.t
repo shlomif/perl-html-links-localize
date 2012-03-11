@@ -1,10 +1,10 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 use strict;
+use warnings;
 
-use Test;
-BEGIN { plan tests => 1 }
+use Test::More tests => 1;
 
-use HTML::Links::Localize;
-ok(1);
+# TEST
+use_ok('HTML::Links::Localize');
 
