@@ -344,7 +344,7 @@ in a make-like fashion.
 
 =head1 AUTHOR
 
-Shlomi Fish E<lt>shlomif@iglu.org.ilE<gt>
+Shlomi Fish, L<http://www.shlomifish.org/>
 
 =head1 COPYRIGHT AND LICENSE
 
