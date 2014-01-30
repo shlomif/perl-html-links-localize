@@ -12,7 +12,7 @@ my $result = GetOptions("f" => \$only_newer);
 my $src_dir = shift;
 my $dest_dir = shift || "./dest";
 
-my $converter = 
+my $converter =
     HTML::Hard::Disk->new(
         'base_dir' => $src_dir,
         'dest_dir' => $dest_dir
