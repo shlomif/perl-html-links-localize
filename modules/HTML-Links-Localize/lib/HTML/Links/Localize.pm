@@ -3,6 +3,8 @@ package HTML::Links::Localize;
 use strict;
 use warnings;
 
+use 5.008;
+
 use HTML::TokeParser;
 use File::Find;
 use File::Copy;

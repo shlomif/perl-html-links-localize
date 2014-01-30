@@ -12,11 +12,12 @@ my $build = Test::Run::Builder->new(
     {
         'Test::More' => 0,
     },
-    'requires' => 
+    'requires' =>
     {
         'strict' => 0,
         'warnings' => 0,
         'HTML::Parser' => 0,
+        'perl' => '5.008',
     },
     configure_requires =>
     {
