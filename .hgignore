@@ -1,5 +1,8 @@
 modules/HTML-Links-Localize/Build
 modules/HTML-Links-Localize/MYMETA.json
 modules/HTML-Links-Localize/MYMETA.yml
+modules/HTML-Links-Localize/META.json
+modules/HTML-Links-Localize/META.yml
 modules/HTML-Links-Localize/_build
 modules/HTML-Links-Localize/blib
+modules/HTML-Links-Localize/HTML-Links-Localize-v*
