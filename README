@@ -1,4 +1,4 @@
-This is HTML::Hard::Disk - a module that converts HTML files to be used
+This is HTML::Links::Localize - a module that converts HTML files to be used
 within a hard-disk directory. What it does is add an index.html suffix to
 internal links to directories.
 
