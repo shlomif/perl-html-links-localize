@@ -1,6 +1,7 @@
-0.2.9   Unknown
+0.2.9   2018-05-21
     * Correct the name of the module in the README.
     * Remove trailing whitespace.
+    * Convert to Dist-Zilla.
 
 0.2.8   2014-01-30
     * Minimum version of perl (CPANTS).
