@@ -1,3 +1,7 @@
+0.2.10  2019-08-23
+    * Moved the VCS repo to https://github.com/shlomif/perl-html-links-localize
+    * No other significant changes.
+
 0.2.9   2018-05-21
     * Correct the name of the module in the README.
     * Remove trailing whitespace.
