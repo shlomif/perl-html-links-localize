@@ -16,20 +16,20 @@ sub _is_older
     my $file2 = shift;
     my @stat1 = stat($file1);
     my @stat2 = stat($file2);
-    return ($stat1[9] <= $stat2[9]);
+    return ( $stat1[9] <= $stat2[9] );
 }
 
 sub _is_newer
 {
     my $file1 = shift;
     my $file2 = shift;
-    return (! _is_older($file1, $file2));
+    return ( !_is_older( $file1, $file2 ) );
 }
 
 sub new
 {
     my $class = shift;
-    my $self = {};
+    my $self  = {};
     bless $self, $class;
 
     $self->_init(@_);
@@ -81,9 +81,9 @@ sub _init
 
     my %args = @_;
 
-    $self->_set_base_dir($args{'base_dir'} || ".");
+    $self->_set_base_dir( $args{'base_dir'} || "." );
 
-    $self->_set_dest_dir($args{'dest_dir'} || "./dest");
+    $self->_set_dest_dir( $args{'dest_dir'} || "./dest" );
 
     return 0;
 }
@@ -97,64 +97,64 @@ sub process_content
     my $out_content = "";
 
     my $out = sub {
-        $out_content .= join("", @_);
+        $out_content .= join( "", @_ );
     };
 
     my $parser = HTML::TokeParser->new($fh);
-    while (my $token = $parser->get_token())
+    while ( my $token = $parser->get_token() )
     {
         my $type = $token->[0];
-        if ($type eq "E")
+        if ( $type eq "E" )
         {
-            $out->($token->[2]);
+            $out->( $token->[2] );
         }
-        elsif ($type eq "C")
+        elsif ( $type eq "C" )
         {
-            $out->($token->[1]);
+            $out->( $token->[1] );
         }
-        elsif ($type eq "T")
+        elsif ( $type eq "T" )
         {
-            $out->($token->[1]);
+            $out->( $token->[1] );
         }
-        elsif ($type eq "D")
+        elsif ( $type eq "D" )
         {
-            $out->($token->[1]);
+            $out->( $token->[1] );
         }
-        elsif ($type eq "PI")
+        elsif ( $type eq "PI" )
         {
-            $out->($token->[2]);
+            $out->( $token->[2] );
         }
-        elsif ($type eq "S")
+        elsif ( $type eq "S" )
         {
-            my $tag = $token->[1];
-            my %process_tags =
-            (
+            my $tag          = $token->[1];
+            my %process_tags = (
                 'form' => { 'action' => 1 },
-                'img' => { 'src' => 1},
-                'a' => { 'href' => 1},
-                'link' => { 'href' => 1},
+                'img'  => { 'src'    => 1 },
+                'a'    => { 'href'   => 1 },
+                'link' => { 'href'   => 1 },
             );
-            if (exists($process_tags{$tag}))
+            if ( exists( $process_tags{$tag} ) )
             {
-                my $ret = "<$tag";
-                my $attrseq = $token->[3];
-                my $attr_values = $token->[2];
+                my $ret           = "<$tag";
+                my $attrseq       = $token->[3];
+                my $attr_values   = $token->[2];
                 my $process_attrs = $process_tags{$tag};
                 foreach my $attr (@$attrseq)
                 {
                     my $value = $attr_values->{$attr};
-                    if (exists($process_attrs->{$attr}))
+                    if ( exists( $process_attrs->{$attr} ) )
                     {
                         # If it's a local link that ends with slash -
                         # then append index.html
-                        if (($value !~ /^[a-z]+:/) && ($value !~ /^\//) &&
-                            ($value =~ /\/(#[^#\/]*)?$/))
+                        if (   ( $value !~ /^[a-z]+:/ )
+                            && ( $value !~ /^\// )
+                            && ( $value =~ /\/(#[^#\/]*)?$/ ) )
                         {
-                            my $pos = rindex($value, "/");
-                            substr($value,$pos+1,0) = "index.html";
+                            my $pos = rindex( $value, "/" );
+                            substr( $value, $pos + 1, 0 ) = "index.html";
                         }
                     }
-                    if ($attr eq "/")
+                    if ( $attr eq "/" )
                     {
                         $ret .= " /";
                     }
@@ -168,7 +168,7 @@ sub process_content
             }
             else
             {
-                $out->($token->[4]);
+                $out->( $token->[4] );
             }
         }
     }
@@ -178,11 +178,11 @@ sub process_content
 
 sub process_file
 {
-    my $self = shift;
+    my $self     = shift;
     my $filename = shift;
 
     my $dest_dir = $self->_get_dest_dir();
-    my $src_dir = $self->_get_base_dir();
+    my $src_dir  = $self->_get_base_dir();
 
     open my $in, '<', "$src_dir/$filename"
         or die "Cannot open '$src_dir/$filename' - $!";
@@ -200,10 +200,10 @@ sub process_dir_tree
     my %args = @_;
 
     my $should_replace_file = sub {
-        my ($src, $dest) = @_;
-        if ($args{'only-newer'})
+        my ( $src, $dest ) = @_;
+        if ( $args{'only-newer'} )
         {
-            return ((! -e $dest) || (_is_newer($src, $dest)));
+            return ( ( !-e $dest ) || ( _is_newer( $src, $dest ) ) );
         }
         else
         {
@@ -211,21 +211,22 @@ sub process_dir_tree
         }
     };
 
-    my $src_dir = $self->_get_base_dir();
+    my $src_dir  = $self->_get_base_dir();
     my $dest_dir = $self->_get_dest_dir();
 
-    my (@dirs, @other_files, @html_files);
+    my ( @dirs, @other_files, @html_files );
 
     my $wanted = sub {
         my $filename = $File::Find::name;
-        if (length($filename) < length($src_dir))
+        if ( length($filename) < length($src_dir) )
         {
             return;
         }
-        # Remove the $src_dir from the filename;
-        $filename = substr($filename, length($src_dir));
 
-        if (-d $_)
+        # Remove the $src_dir from the filename;
+        $filename = substr( $filename, length($src_dir) );
+
+        if ( -d $_ )
         {
             push @dirs, $filename;
         }
@@ -239,15 +240,15 @@ sub process_dir_tree
         }
     };
 
-    find($wanted, $src_dir);
+    find( $wanted, $src_dir );
 
     my $soft_mkdir = sub {
         my $dir = shift;
-        if (-d $dir)
+        if ( -d $dir )
         {
             # Do nothing
         }
-        elsif (-e $dir)
+        elsif ( -e $dir )
         {
             die "$dir exists in destination and is not a directory";
         }
@@ -267,19 +268,19 @@ sub process_dir_tree
 
     foreach my $file (@other_files)
     {
-        my $src = "$src_dir/$file";
+        my $src  = "$src_dir/$file";
         my $dest = "$dest_dir/$file";
-        if ($should_replace_file->($src, $dest))
+        if ( $should_replace_file->( $src, $dest ) )
         {
-            copy($src, $dest);
+            copy( $src, $dest );
         }
     }
 
     foreach my $file (@html_files)
     {
-        my $src = "$src_dir/$file";
+        my $src  = "$src_dir/$file";
         my $dest = "$dest_dir/$file";
-        if ($should_replace_file->($src,$dest))
+        if ( $should_replace_file->( $src, $dest ) )
         {
             $self->process_file($file);
         }
