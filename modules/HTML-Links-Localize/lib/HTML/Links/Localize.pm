@@ -5,9 +5,9 @@ use warnings;
 
 use 5.008;
 
-use HTML::TokeParser;
-use File::Find;
-use File::Copy;
+use HTML::TokeParser ();
+use File::Find qw/ find /;
+use File::Copy qw/ copy /;
 
 # Two utility functions
 sub _is_older
@@ -352,14 +352,7 @@ Shlomi Fish, L<http://www.shlomifish.org/>
 
 Copyright 2004, Shlomi Fish.
 
-You can use, modify and distribute this module under the terms of the MIT X11
+You can use, modify and distribute this module under the terms of the MIT Expat
 license. ( L<http://www.opensource.org/licenses/mit-license.php> ).
 
-=head2 NOTE
-
-The CPAN meta-data says this work is "BSD-licensed". The BSD license was chosen
-because it was the closest option to MIT X11, and because the MIT X11 license
-is a BSD-style license. However, the correct license is the MIT X11.
-
 =cut
-

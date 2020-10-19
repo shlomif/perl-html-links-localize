@@ -1,3 +1,8 @@
+0.2.11  2020-10-19
+
+    * Avoid stale POD
+        * Inspired by Lady_Aleena.
+
 0.2.10  2019-08-23
     * Moved the VCS repo to https://github.com/shlomif/perl-html-links-localize
     * No other significant changes.
